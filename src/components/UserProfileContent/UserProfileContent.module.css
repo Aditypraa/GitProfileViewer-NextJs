@@ -1,0 +1,15 @@
+.error {
+  padding: 16px;
+  background-color: #ffebee;
+  color: #b71c1c;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.loading {
+  padding: 24px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}

@@ -1,0 +1,149 @@
+.container {
+  background-color: var(--background);
+  border-radius: 8px;
+  border: 1px solid var(--gray-alpha-200);
+  overflow: hidden;
+}
+
+.header {
+  padding: 16px;
+  border-bottom: 1px solid var(--gray-alpha-200);
+}
+
+.title {
+  font-size: 18px;
+  margin: 0;
+}
+
+.title a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.title a:hover {
+  text-decoration: underline;
+}
+
+.content {
+  padding: 24px;
+  overflow-x: auto;
+}
+
+.markdown {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--foreground);
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.markdown h1 {
+  padding-bottom: 0.3em;
+  font-size: 2em;
+  border-bottom: 1px solid var(--gray-alpha-200);
+}
+
+.markdown h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.5em;
+  border-bottom: 1px solid var(--gray-alpha-200);
+}
+
+.markdown p {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.markdown a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.markdown a:hover {
+  text-decoration: underline;
+}
+
+.markdown img {
+  max-width: 100%;
+  box-sizing: content-box;
+}
+
+.markdown ul,
+.markdown ol {
+  padding-left: 2em;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.markdown code {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
+  background-color: var(--gray-alpha-100);
+  border-radius: 3px;
+  font-family: var(--font-geist-mono);
+}
+
+.markdown pre {
+  word-wrap: normal;
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: var(--gray-alpha-100);
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.markdown pre code {
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+}
+
+.loading {
+  text-align: center;
+  padding: 32px;
+  font-size: 16px;
+  color: #666;
+}
+
+.noReadme {
+  text-align: center;
+  padding: 32px;
+  font-size: 16px;
+  color: #666;
+  font-style: italic;
+}
+
+.placeholder {
+  border: 1px dashed var(--gray-alpha-200);
+  border-radius: 8px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--gray-alpha-100);
+}
+
+.placeholderContent {
+  text-align: center;
+  padding: 24px;
+  color: #666;
+}
+
+.placeholderContent h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-weight: normal;
+}

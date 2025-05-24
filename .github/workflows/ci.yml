@@ -1,0 +1,51 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.x] # Ganti dengan versi Node.js yang Anda inginkan
+
+    steps:
+      # Checkout the repository
+      - uses: actions/checkout@v3
+
+      # Setup Node.js dengan versi 22.x
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }} # Tentukan versi Node.js yang sesuai
+
+      # Cache Node Modules
+      - name: Cache Node Modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      # Install Dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # Run Lint and Prettier
+      - name: Run Lint and Prettier
+        run: npm run check
+
+        # Run Build
+      - name: Build Project
+        run: npm run build
+
+        # Set environment variables
+        env:
+          CI: true
