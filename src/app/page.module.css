@@ -31,38 +31,7 @@
   position: relative;
 }
 
-.breadcrumbs {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.breadcrumbSeparator {
-  color: #666;
-}
-
-.breadcrumbLink {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.breadcrumbLink:hover {
-  text-decoration: underline;
-}
-
-.backButton {
-  background: none;
-  border: none;
-  color: #0070f3;
-  cursor: pointer;
-  font-size: 16px;
-  padding: 0;
-}
-
-.backButton:hover {
-  text-decoration: underline;
-}
+/* Remove redundant breadcrumb styles since we now have a dedicated component */
 
 .title {
   font-size: 32px;
@@ -164,12 +133,7 @@
   gap: 24px;
 }
 
-.footer {
-  text-align: center;
-  padding: 24px 0;
-  font-size: 14px;
-  color: #666;
-}
+/* Remove redundant footer styles since we now have a dedicated component */
 
 /* Responsive styles */
 @media (max-width: 600px) {

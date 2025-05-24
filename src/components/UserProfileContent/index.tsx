@@ -9,12 +9,12 @@ import RepoList from '../RepoList';
 
 export default function UserProfileContent() {
   const params = useParams();
-  const username = params.username as string;
+  const username = typeof params.username === 'string' ? params.username : '';
   const { searchUser, loading, error } = useGitHub();
 
   useEffect(() => {
     if (username) {
-      searchUser(decodeURIComponent(username));
+      searchUser(username);
     }
   }, [username, searchUser]);
 

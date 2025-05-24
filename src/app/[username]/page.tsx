@@ -1,47 +1,42 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { GitHubProvider } from '@/context/GitHubContext';
 import UserProfileContent from '@/components/UserProfileContent';
 import styles from '../page.module.css';
-
-function UserProfilePage() {
-  return (
-    <div className={styles.content}>
-      <div className={styles.userSection}>
-        <UserProfileContent />
-      </div>
-    </div>
-  );
-}
+import Breadcrumb, { BreadcrumbItem } from '@/components/Breadcrumb';
+import Footer from '@/components/Footer';
 
 export default function UserProfileWrapper() {
-  const router = useRouter();
+  const params = useParams();
+  const username = typeof params.username === 'string' ? params.username : '';
 
-  const handleBackToHome = () => {
-    router.push('/');
-  };
+  // Define breadcrumb items
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { label: 'Home', href: '/' },
+    { label: username },
+  ];
 
   return (
     <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.headerContent}>
-          <button onClick={handleBackToHome} className={styles.backButton}>
-            ← Home
-          </button>
+          <Breadcrumb items={breadcrumbItems} />
           <h1 className={styles.title}>GitHub Profile Viewer</h1>
         </div>
       </header>
 
       <GitHubProvider>
         <main className={styles.main}>
-          <UserProfilePage />
+          <div className={styles.content}>
+            <div className={styles.userSection}>
+              <UserProfileContent />
+            </div>
+          </div>
         </main>
       </GitHubProvider>
 
-      <footer className={styles.footer}>
-        <p>Built with Next.js and GitHub API</p>
-      </footer>
+      <Footer />
     </div>
   );
 }

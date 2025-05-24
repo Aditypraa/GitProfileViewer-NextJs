@@ -6,6 +6,7 @@ import { useGitHub } from '@/context/GitHubContext';
 import styles from './RepoDetailsContent.module.css';
 import UserProfile from '../UserProfile';
 import ReadmeViewer from '../ReadmeViewer';
+import { getLanguageColor } from '@/lib/languageColor';
 
 export default function RepoDetailsContent() {
   const params = useParams();
@@ -18,10 +19,7 @@ export default function RepoDetailsContent() {
   useEffect(() => {
     if (username && repoSlug) {
       // Use the new combined function instead of separate calls
-      loadUserAndSelectRepo(
-        decodeURIComponent(username),
-        decodeURIComponent(repoSlug),
-      );
+      loadUserAndSelectRepo(username, repoSlug);
     }
   }, [username, repoSlug, loadUserAndSelectRepo]);
 
@@ -93,24 +91,4 @@ export default function RepoDetailsContent() {
       </div>
     </div>
   );
-}
-
-// Helper function for language color
-function getLanguageColor(language: string): string {
-  const colors: Record<string, string> = {
-    JavaScript: '#f1e05a',
-    TypeScript: '#3178c6',
-    Python: '#3572A5',
-    Java: '#b07219',
-    Ruby: '#701516',
-    PHP: '#4F5D95',
-    CSS: '#563d7c',
-    HTML: '#e34c26',
-    Go: '#00ADD8',
-    Swift: '#F05138',
-    Kotlin: '#A97BFF',
-    Rust: '#dea584',
-  };
-
-  return colors[language] || '#8f8f8f';
 }

@@ -4,6 +4,7 @@ import { useGitHub } from '@/context/GitHubContext';
 import styles from './ReadmeViewer.module.css';
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import rehypeRaw from 'rehype-raw';
 
 // Dynamically import ReactMarkdown to avoid SSR issues
 const ReactMarkdown = dynamic(() => import('react-markdown'), {
@@ -56,7 +57,9 @@ export default function ReadmeViewer() {
           <div className={styles.loading}>Loading README...</div>
         ) : markdownContent ? (
           <div className={styles.markdown}>
-            <ReactMarkdown>{markdownContent}</ReactMarkdown>
+            <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+              {markdownContent}
+            </ReactMarkdown>
           </div>
         ) : (
           <div className={styles.noReadme}>

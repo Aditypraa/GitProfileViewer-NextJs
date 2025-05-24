@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   const [username, setUsername] = useState('');
@@ -11,9 +12,9 @@ export default function Home() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (username.trim()) {
+    if (username) {
       setLoading(true);
-      router.push(`/${encodeURIComponent(username.trim())}`);
+      router.push(`/${username}`);
     }
   };
 
@@ -73,9 +74,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className={styles.footer}>
-        <p>Built with Next.js and GitHub API</p>
-      </footer>
+      <Footer />
     </div>
   );
 }

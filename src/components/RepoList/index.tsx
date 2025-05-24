@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useGitHub } from '@/context/GitHubContext';
 import styles from './RepoList.module.css';
+import { formatDate } from '@/lib/formatDate';
+import { getLanguageColor } from '@/lib/languageColor';
 
 export default function RepoList() {
   const { repos, user } = useGitHub();
@@ -116,45 +118,4 @@ export default function RepoList() {
       )}
     </div>
   );
-}
-
-// Helper functions
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  const now = new Date();
-  const diffTime = Math.abs(now.getTime() - date.getTime());
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-
-  if (diffDays === 0) {
-    return 'today';
-  } else if (diffDays === 1) {
-    return 'yesterday';
-  } else if (diffDays < 30) {
-    return `${diffDays} days ago`;
-  } else if (diffDays < 365) {
-    const months = Math.floor(diffDays / 30);
-    return `${months} month${months > 1 ? 's' : ''} ago`;
-  } else {
-    const years = Math.floor(diffDays / 365);
-    return `${years} year${years > 1 ? 's' : ''} ago`;
-  }
-}
-
-function getLanguageColor(language: string): string {
-  const colors: Record<string, string> = {
-    JavaScript: '#f1e05a',
-    TypeScript: '#3178c6',
-    Python: '#3572A5',
-    Java: '#b07219',
-    Ruby: '#701516',
-    PHP: '#4F5D95',
-    CSS: '#563d7c',
-    HTML: '#e34c26',
-    Go: '#00ADD8',
-    Swift: '#F05138',
-    Kotlin: '#A97BFF',
-    Rust: '#dea584',
-  };
-
-  return colors[language] || '#8f8f8f';
 }
