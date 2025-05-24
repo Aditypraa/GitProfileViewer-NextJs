@@ -38,7 +38,7 @@ export function GitHubProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<string | null>(null);
 
   const searchUser = useCallback(async (username: string) => {
-    if (!username.trim()) return;
+    if (!username) return;
 
     setLoading(true);
     setError(null);

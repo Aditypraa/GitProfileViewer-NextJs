@@ -16,7 +16,11 @@ export default function SearchForm() {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.inputWrapper}>
+        <label htmlFor="github-username" className="sr-only">
+          GitHub Username
+        </label>
         <input
+          id="github-username"
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -27,7 +31,7 @@ export default function SearchForm() {
         <button
           type="submit"
           className={styles.button}
-          disabled={loading || !username.trim()}
+          disabled={loading || !username}
         >
           {loading ? 'Searching...' : 'Search'}
         </button>

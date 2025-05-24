@@ -19,11 +19,19 @@ export default function UserProfileContent() {
   }, [username, searchUser]);
 
   if (error) {
-    return <div className={styles.error}>{error}</div>;
+    return (
+      <section className={styles.error} role="alert">
+        {error}
+      </section>
+    );
   }
 
   if (loading) {
-    return <div className={styles.loading}>Loading user profile...</div>;
+    return (
+      <section className={styles.loading} aria-live="polite">
+        Loading user profile...
+      </section>
+    );
   }
 
   return (

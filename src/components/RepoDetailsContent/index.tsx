@@ -25,29 +25,37 @@ export default function RepoDetailsContent() {
 
   if (error) {
     return (
-      <div className={styles.error}>
+      <section className={styles.error} role="alert">
         <p>{error}</p>
         <button onClick={() => router.back()} className={styles.backButton}>
           Go Back
         </button>
-      </div>
+      </section>
     );
   }
 
   if (loading) {
-    return <div className={styles.loading}>Loading repository details...</div>;
+    return (
+      <section className={styles.loading} aria-live="polite">
+        Loading repository details...
+      </section>
+    );
   }
 
   // Check if we have the necessary data
   if (!user || !selectedRepo) {
-    return <div className={styles.loading}>Loading repository data...</div>;
+    return (
+      <section className={styles.loading} aria-live="polite">
+        Loading repository data...
+      </section>
+    );
   }
 
   return (
     <div className={styles.container}>
-      <div className={styles.sidebar}>
+      <aside className={styles.sidebar}>
         <UserProfile compact />
-        <div className={styles.repoInfo}>
+        <section className={styles.repoInfo}>
           <h3 className={styles.repoTitle}>{selectedRepo.name}</h3>
           {selectedRepo.description && (
             <p className={styles.repoDescription}>{selectedRepo.description}</p>
@@ -83,12 +91,12 @@ export default function RepoDetailsContent() {
           >
             View on GitHub
           </a>
-        </div>
-      </div>
+        </section>
+      </aside>
 
-      <div className={styles.main}>
+      <main className={styles.main}>
         <ReadmeViewer />
-      </div>
+      </main>
     </div>
   );
 }

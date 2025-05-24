@@ -41,18 +41,26 @@ export default function RepoList() {
   if (repos.length === 0) return null;
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
+    <section className={styles.container}>
+      <header className={styles.header}>
         <h2 className={styles.title}>Repositories ({repos.length})</h2>
         <div className={styles.filters}>
+          <label htmlFor="repo-filter" className="sr-only">
+            Filter repositories
+          </label>
           <input
+            id="repo-filter"
             type="text"
             placeholder="Filter repositories..."
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
             className={styles.filterInput}
           />
+          <label htmlFor="repo-sort" className="sr-only">
+            Sort repositories
+          </label>
           <select
+            id="repo-sort"
             value={sortBy}
             onChange={(e) =>
               setSortBy(e.target.value as 'updated' | 'stars' | 'name')
@@ -64,12 +72,10 @@ export default function RepoList() {
             <option value="name">Name</option>
           </select>
         </div>
-      </div>
+      </header>
 
       {sortedRepos.length === 0 ? (
-        <div className={styles.noResults}>
-          No repositories match your filter
-        </div>
+        <p className={styles.noResults}>No repositories match your filter</p>
       ) : (
         <ul className={styles.repoList}>
           {sortedRepos.map((repo) => (
@@ -108,14 +114,14 @@ export default function RepoList() {
                   <span className={styles.forks}>🍴 {repo.forks_count}</span>
                 )}
 
-                <span className={styles.updated}>
+                <time className={styles.updated} dateTime={repo.updated_at}>
                   Updated {formatDate(repo.updated_at)}
-                </span>
+                </time>
               </div>
             </li>
           ))}
         </ul>
       )}
-    </div>
+    </section>
   );
 }

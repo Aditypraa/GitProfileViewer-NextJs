@@ -40,7 +40,11 @@ export default function Home() {
       <main className={styles.main}>
         <form className={styles.searchForm} onSubmit={handleSubmit}>
           <div className={styles.inputWrapper}>
+            <label htmlFor="home-github-username" className="sr-only">
+              Enter GitHub username
+            </label>
             <input
+              id="home-github-username"
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -51,14 +55,14 @@ export default function Home() {
             <button
               type="submit"
               className={styles.button}
-              disabled={loading || !username.trim()}
+              disabled={loading || !username}
             >
               {loading ? 'Searching...' : 'Search'}
             </button>
           </div>
         </form>
 
-        <div className={styles.featuredUsers}>
+        <section className={styles.featuredUsers}>
           <h2>Popular GitHub Users</h2>
           <div className={styles.userGrid}>
             {featuredUsers.map((user) => (
@@ -71,7 +75,7 @@ export default function Home() {
               </button>
             ))}
           </div>
-        </div>
+        </section>
       </main>
 
       <Footer />

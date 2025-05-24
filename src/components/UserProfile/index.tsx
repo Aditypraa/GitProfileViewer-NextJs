@@ -15,7 +15,7 @@ export default function UserProfile({ compact = false }: UserProfileProps) {
 
   if (compact) {
     return (
-      <div className={`${styles.profile} ${styles.compact}`}>
+      <article className={`${styles.profile} ${styles.compact}`}>
         <div className={styles.avatar}>
           <Image
             src={user.avatar_url}
@@ -26,20 +26,20 @@ export default function UserProfile({ compact = false }: UserProfileProps) {
           />
         </div>
 
-        <div className={styles.info}>
+        <section className={styles.info}>
           <h2 className={styles.name}>{user.name || user.login}</h2>
           <p className={styles.username}>
             <a href={user.html_url} target="_blank" rel="noopener noreferrer">
               @{user.login}
             </a>
           </p>
-        </div>
-      </div>
+        </section>
+      </article>
     );
   }
 
   return (
-    <div className={styles.profile}>
+    <article className={styles.profile}>
       <div className={styles.avatar}>
         <Image
           src={user.avatar_url}
@@ -50,7 +50,7 @@ export default function UserProfile({ compact = false }: UserProfileProps) {
         />
       </div>
 
-      <div className={styles.info}>
+      <section className={styles.info}>
         <h2 className={styles.name}>{user.name || user.login}</h2>
         <p className={styles.username}>
           <a href={user.html_url} target="_blank" rel="noopener noreferrer">
@@ -60,22 +60,22 @@ export default function UserProfile({ compact = false }: UserProfileProps) {
 
         {user.bio && <p className={styles.bio}>{user.bio}</p>}
 
-        <div className={styles.stats}>
+        <dl className={styles.stats}>
           <div className={styles.stat}>
-            <span className={styles.statValue}>{user.public_repos}</span>
-            <span className={styles.statLabel}>Repositories</span>
+            <dt className={styles.statLabel}>Repositories</dt>
+            <dd className={styles.statValue}>{user.public_repos}</dd>
           </div>
           <div className={styles.stat}>
-            <span className={styles.statValue}>{user.followers}</span>
-            <span className={styles.statLabel}>Followers</span>
+            <dt className={styles.statLabel}>Followers</dt>
+            <dd className={styles.statValue}>{user.followers}</dd>
           </div>
           <div className={styles.stat}>
-            <span className={styles.statValue}>{user.following}</span>
-            <span className={styles.statLabel}>Following</span>
+            <dt className={styles.statLabel}>Following</dt>
+            <dd className={styles.statValue}>{user.following}</dd>
           </div>
-        </div>
+        </dl>
 
-        <div className={styles.details}>
+        <address className={styles.details}>
           {user.location && (
             <div className={styles.detailItem}>
               <span className={styles.detailIcon}>📍</span>
@@ -107,8 +107,8 @@ export default function UserProfile({ compact = false }: UserProfileProps) {
               <span>{user.company}</span>
             </div>
           )}
-        </div>
-      </div>
-    </div>
+        </address>
+      </section>
+    </article>
   );
 }

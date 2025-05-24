@@ -29,18 +29,18 @@ export default function ReadmeViewer() {
 
   if (!selectedRepo) {
     return (
-      <div className={styles.placeholder}>
+      <article className={styles.placeholder}>
         <div className={styles.placeholderContent}>
           <h3>No repository selected</h3>
           <p>Select a repository to view its README</p>
         </div>
-      </div>
+      </article>
     );
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
+    <article className={styles.container}>
+      <header className={styles.header}>
         <h2 className={styles.title}>
           <a
             href={selectedRepo.html_url}
@@ -50,11 +50,13 @@ export default function ReadmeViewer() {
             {selectedRepo.full_name}
           </a>
         </h2>
-      </div>
+      </header>
 
-      <div className={styles.content}>
+      <section className={styles.content}>
         {loading ? (
-          <div className={styles.loading}>Loading README...</div>
+          <div className={styles.loading} aria-live="polite">
+            Loading README...
+          </div>
         ) : markdownContent ? (
           <div className={styles.markdown}>
             <ReactMarkdown rehypePlugins={[rehypeRaw]}>
@@ -62,11 +64,11 @@ export default function ReadmeViewer() {
             </ReactMarkdown>
           </div>
         ) : (
-          <div className={styles.noReadme}>
+          <p className={styles.noReadme}>
             No README found for this repository.
-          </div>
+          </p>
         )}
-      </div>
-    </div>
+      </section>
+    </article>
   );
 }
