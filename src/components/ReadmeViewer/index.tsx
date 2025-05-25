@@ -5,6 +5,8 @@ import styles from './ReadmeViewer.module.css';
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import rehypeRaw from 'rehype-raw';
+import rehypeSanitize from 'rehype-sanitize';
+import remarkGfm from 'remark-gfm';
 
 // Dynamically import ReactMarkdown to avoid SSR issues
 const ReactMarkdown = dynamic(() => import('react-markdown'), {
@@ -63,7 +65,9 @@ export default function ReadmeViewer() {
           </div>
         ) : markdownContent ? (
           <div className={styles.markdown}>
-            <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+            <ReactMarkdown
+              rehypePlugins={[rehypeRaw, rehypeSanitize, remarkGfm]}
+            >
               {markdownContent}
             </ReactMarkdown>
           </div>
