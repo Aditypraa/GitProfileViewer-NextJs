@@ -66,7 +66,8 @@ export default function ReadmeViewer() {
         ) : markdownContent ? (
           <div className={styles.markdown}>
             <ReactMarkdown
-              rehypePlugins={[rehypeRaw, rehypeSanitize, remarkGfm]}
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeRaw, rehypeSanitize]}
             >
               {markdownContent}
             </ReactMarkdown>

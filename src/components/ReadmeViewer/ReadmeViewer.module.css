@@ -83,7 +83,11 @@
   max-width: 100%;
   box-sizing: content-box;
   height: auto;
-  display: block;
+  display: inline-block; /* Changed from block to inline-block for badges */
+  vertical-align: middle; /* Helps align badges with text */
+}
+
+.markdownImage {
   margin: 0 auto;
 }
 
