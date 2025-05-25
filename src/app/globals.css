@@ -1,12 +1,66 @@
 :root {
+  /* Base colors */
   --background: #ffffff;
   --foreground: #171717;
+
+  /* UI colors */
+  --primary: #0070f3;
+  --primary-hover: #0060df;
+  --error-bg: #ffebee;
+  --error-text: #b71c1c;
+
+  /* Neutral colors */
+  --gray-100: #f5f5f5;
+  --gray-200: #e5e5e5;
+  --gray-300: #d4d4d4;
+  --gray-400: #a3a3a3;
+  --gray-500: #737373;
+  --gray-600: #525252;
+
+  /* Alpha colors */
+  --gray-alpha-100: rgba(0, 0, 0, 0.05);
+  --gray-alpha-200: rgba(0, 0, 0, 0.08);
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
+    /* Adjust colors for dark mode */
+    --gray-100: #1a1a1a;
+    --gray-200: #2a2a2a;
+    --gray-300: #404040;
+    --gray-400: #6b6b6b;
+    --gray-500: #a0a0a0;
+    --gray-600: #d0d0d0;
+
+    /* Alpha colors in dark mode */
+    --gray-alpha-100: rgba(255, 255, 255, 0.06);
+    --gray-alpha-200: rgba(255, 255, 255, 0.145);
+
+    /* Adjust shadows */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 2px 10px rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -19,14 +73,27 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family:
+    var(--font-inter),
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
 }
 
 code,
 pre {
-  font-family: var(--font-jetbrains-mono), monospace;
+  font-family: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
 }
 
 * {
@@ -35,9 +102,42 @@ pre {
   margin: 0;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+}
+
 a {
-  color: inherit;
+  color: var(--primary);
   text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Button styles */
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Container max-width */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--space-5);
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 var(--space-4);
+  }
 }
 
 /* Screen reader only class */

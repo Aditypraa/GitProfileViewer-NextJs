@@ -29,9 +29,7 @@ export default function UserProfileWrapper() {
       <GitHubProvider>
         <main className={styles.main}>
           <div className={styles.content}>
-            <div className={styles.userSection}>
-              <UserProfileContent />
-            </div>
+            <UserProfileContent />
           </div>
         </main>
       </GitHubProvider>

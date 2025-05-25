@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useGitHub } from '@/context/GitHubContext';
 import styles from './RepoDetailsContent.module.css';
 import UserProfile from '../UserProfile';
 import ReadmeViewer from '../ReadmeViewer';
-import { getLanguageColor } from '@/lib/languageColor';
+import { getLanguageColor } from '@/utils/languageColor';
 
 export default function RepoDetailsContent() {
   const params = useParams();
@@ -15,6 +15,21 @@ export default function RepoDetailsContent() {
   const { loadUserAndSelectRepo, loading, error, user, selectedRepo } =
     useGitHub();
   const router = useRouter();
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Handle responsive layout detection
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
   useEffect(() => {
     if (username && repoSlug) {
@@ -38,6 +53,13 @@ export default function RepoDetailsContent() {
     return (
       <section className={styles.loading} aria-live="polite">
         Loading repository details...
+        <div className={styles.skeletonContainer}>
+          <div className={styles.skeletonSidebar}>
+            <div className={styles.skeletonProfile}></div>
+            <div className={styles.skeletonRepoInfo}></div>
+          </div>
+          <div className={styles.skeletonReadme}></div>
+        </div>
       </section>
     );
   }
@@ -47,6 +69,13 @@ export default function RepoDetailsContent() {
     return (
       <section className={styles.loading} aria-live="polite">
         Loading repository data...
+        <div className={styles.skeletonContainer}>
+          <div className={styles.skeletonSidebar}>
+            <div className={styles.skeletonProfile}></div>
+            <div className={styles.skeletonRepoInfo}></div>
+          </div>
+          <div className={styles.skeletonReadme}></div>
+        </div>
       </section>
     );
   }
@@ -56,7 +85,9 @@ export default function RepoDetailsContent() {
       <aside className={styles.sidebar}>
         <UserProfile compact />
         <section className={styles.repoInfo}>
-          <h3 className={styles.repoTitle}>{selectedRepo.name}</h3>
+          <h3 className={styles.repoTitle}>
+            {isMobile ? selectedRepo.name : selectedRepo.full_name}
+          </h3>
           {selectedRepo.description && (
             <p className={styles.repoDescription}>{selectedRepo.description}</p>
           )}
@@ -68,17 +99,18 @@ export default function RepoDetailsContent() {
                   style={{
                     backgroundColor: getLanguageColor(selectedRepo.language),
                   }}
+                  aria-hidden="true"
                 ></span>
                 {selectedRepo.language}
               </span>
             )}
             {selectedRepo.stargazers_count > 0 && (
-              <span className={styles.stars}>
+              <span className={styles.stars} title="Stars">
                 ⭐ {selectedRepo.stargazers_count}
               </span>
             )}
             {selectedRepo.forks_count > 0 && (
-              <span className={styles.forks}>
+              <span className={styles.forks} title="Forks">
                 🍴 {selectedRepo.forks_count}
               </span>
             )}

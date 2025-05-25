@@ -1,15 +1,63 @@
 .error {
-  padding: 16px;
-  background-color: #ffebee;
-  color: #b71c1c;
-  border-radius: 8px;
-  margin-bottom: 16px;
+  padding: var(--space-4);
+  background-color: var(--error-bg);
+  color: var(--error-text);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
   text-align: center;
 }
 
 .loading {
-  padding: 24px;
+  padding: var(--space-5);
   text-align: center;
-  color: #666;
+  color: var(--gray-500);
   font-style: italic;
+}
+
+.skeletonLoader {
+  animation: pulse 1.5s infinite ease-in-out;
+  background: var(--gray-alpha-100);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+}
+
+.skeletonContainer {
+  margin-top: var(--space-4);
+}
+
+.profileSkeleton {
+  height: 180px;
+  margin-bottom: var(--space-5);
+}
+
+.repoSkeleton {
+  height: 400px;
+}
+
+.backButton {
+  margin-top: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  background-color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+@media (prefers-color-scheme: dark) {
+  .backButton {
+    background-color: var(--gray-200);
+    color: var(--foreground);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
 }

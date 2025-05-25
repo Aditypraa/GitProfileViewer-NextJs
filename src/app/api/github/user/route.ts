@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import axios from 'axios';
-import { githubApiClient } from '@/lib/apiUtils';
+import { githubApiClient } from '@/lib/githubApi';
 import { GitHubUser } from '@/types/github';
 
 export async function GET(req: Request) {

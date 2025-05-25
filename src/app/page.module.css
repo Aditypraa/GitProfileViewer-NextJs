@@ -1,27 +1,15 @@
 .container {
-  --gray-rgb: 0, 0, 0;
-  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
-  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
-
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 24px;
-}
-
-@media (prefers-color-scheme: dark) {
-  .container {
-    --gray-rgb: 255, 255, 255;
-    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
-    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
-  }
+  padding: 0 var(--space-5);
 }
 
 .header {
   text-align: center;
-  padding: 48px 0 24px;
+  padding: var(--space-7) 0 var(--space-5);
 }
 
 .headerContent {
@@ -31,21 +19,19 @@
   position: relative;
 }
 
-/* Remove redundant breadcrumb styles since we now have a dedicated component */
-
 .title {
-  font-size: 32px;
-  margin-bottom: 8px;
+  font-size: 2rem;
+  margin-bottom: var(--space-2);
 }
 
 .description {
-  font-size: 16px;
-  color: #666;
+  font-size: 1rem;
+  color: var(--gray-500);
 }
 
 .main {
   flex: 1;
-  padding: 24px 0;
+  padding: var(--space-5) 0;
 }
 
 .searchForm {
@@ -57,44 +43,44 @@
 .inputWrapper {
   display: flex;
   position: relative;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
 }
 
 .input {
   flex: 1;
-  padding: 12px 16px;
-  font-size: 16px;
+  padding: var(--space-3) var(--space-4);
+  font-size: 1rem;
   border: 1px solid var(--gray-alpha-200);
   border-right: none;
-  border-radius: 8px 0 0 8px;
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
   outline: none;
   background: var(--background);
   color: var(--foreground);
 }
 
 .input:focus {
-  border-color: #0070f3;
+  border-color: var(--primary);
 }
 
 .button {
-  padding: 0 20px;
-  background-color: #0070f3;
+  padding: 0 var(--space-5);
+  background-color: var(--primary);
   color: white;
   border: none;
-  border-radius: 0 8px 8px 0;
-  font-size: 16px;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
 .button:hover:not(:disabled) {
-  background-color: #0060df;
+  background-color: var(--primary-hover);
 }
 
 .button:disabled {
-  background-color: #ccc;
+  background-color: var(--gray-300);
   cursor: not-allowed;
 }
 
@@ -106,18 +92,18 @@
 .userGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 16px;
-  margin-top: 1rem;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
   max-width: 600px;
   margin: 1rem auto 0;
 }
 
 .userButton {
-  padding: 8px 12px;
+  padding: var(--space-2) var(--space-3);
   background-color: var(--background);
   border: 1px solid var(--gray-alpha-200);
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -130,22 +116,23 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: var(--space-5);
 }
 
-/* Remove redundant footer styles since we now have a dedicated component */
-
-/* Responsive styles */
 @media (max-width: 600px) {
   .container {
-    padding: 0 16px;
+    padding: 0 var(--space-4);
   }
 
   .header {
-    padding: 32px 0 16px;
+    padding: var(--space-6) 0 var(--space-4);
   }
 
   .title {
-    font-size: 24px;
+    font-size: 1.5rem;
+  }
+
+  .userGrid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

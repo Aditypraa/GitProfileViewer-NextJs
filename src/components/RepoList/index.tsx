@@ -1,17 +1,32 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useGitHub } from '@/context/GitHubContext';
 import styles from './RepoList.module.css';
-import { formatDate } from '@/lib/formatDate';
-import { getLanguageColor } from '@/lib/languageColor';
+import { formatDate } from '@/utils/formatDate';
+import { getLanguageColor } from '@/utils/languageColor';
 
 export default function RepoList() {
   const { repos, user } = useGitHub();
   const [filter, setFilter] = useState('');
   const [sortBy, setSortBy] = useState<'updated' | 'stars' | 'name'>('updated');
   const router = useRouter();
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Handle responsive breakpoints
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
   const filteredRepos = repos.filter(
     (repo) =>
@@ -51,7 +66,7 @@ export default function RepoList() {
           <input
             id="repo-filter"
             type="text"
-            placeholder="Filter repositories..."
+            placeholder={isMobile ? 'Filter...' : 'Filter repositories...'}
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
             className={styles.filterInput}
@@ -66,6 +81,7 @@ export default function RepoList() {
               setSortBy(e.target.value as 'updated' | 'stars' | 'name')
             }
             className={styles.sortSelect}
+            aria-label="Sort repositories by"
           >
             <option value="updated">Recently updated</option>
             <option value="stars">Stars</option>
@@ -85,6 +101,15 @@ export default function RepoList() {
               onClick={() =>
                 handleRepoClick(repo as { slug: string; id: number })
               }
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleRepoClick(repo as { slug: string; id: number });
+                }
+              }}
+              tabIndex={0}
+              role="button"
+              aria-label={`View repository: ${repo.name}`}
             >
               <h3 className={styles.repoName}>{repo.name}</h3>
               {repo.description && (
@@ -99,23 +124,32 @@ export default function RepoList() {
                       style={{
                         backgroundColor: getLanguageColor(repo.language),
                       }}
+                      aria-hidden="true"
                     ></span>
                     {repo.language}
                   </span>
                 )}
 
                 {repo.stargazers_count > 0 && (
-                  <span className={styles.stars}>
+                  <span className={styles.stars} title="Stars">
                     ⭐ {repo.stargazers_count}
                   </span>
                 )}
 
                 {repo.forks_count > 0 && (
-                  <span className={styles.forks}>🍴 {repo.forks_count}</span>
+                  <span className={styles.forks} title="Forks">
+                    🍴 {repo.forks_count}
+                  </span>
                 )}
 
-                <time className={styles.updated} dateTime={repo.updated_at}>
-                  Updated {formatDate(repo.updated_at)}
+                <time
+                  className={styles.updated}
+                  dateTime={repo.updated_at}
+                  title="Last updated"
+                >
+                  {isMobile
+                    ? formatDate(repo.updated_at, true)
+                    : `Updated ${formatDate(repo.updated_at)}`}
                 </time>
               </div>
             </li>

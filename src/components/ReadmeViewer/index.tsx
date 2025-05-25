@@ -46,6 +46,7 @@ export default function ReadmeViewer() {
             href={selectedRepo.html_url}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`View ${selectedRepo.full_name} on GitHub`}
           >
             {selectedRepo.full_name}
           </a>
@@ -55,7 +56,10 @@ export default function ReadmeViewer() {
       <section className={styles.content}>
         {loading ? (
           <div className={styles.loading} aria-live="polite">
-            Loading README...
+            <div className={styles.loadingContainer}>Loading README...</div>
+            <div className={`${styles.skeletonLine} ${styles.line1}`}></div>
+            <div className={`${styles.skeletonLine} ${styles.line2}`}></div>
+            <div className={`${styles.skeletonLine} ${styles.line3}`}></div>
           </div>
         ) : markdownContent ? (
           <div className={styles.markdown}>

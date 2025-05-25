@@ -21,7 +21,13 @@ export default function UserProfileContent() {
   if (error) {
     return (
       <section className={styles.error} role="alert">
-        {error}
+        <p>{error}</p>
+        <button
+          onClick={() => (window.location.href = '/')}
+          className={styles.backButton}
+        >
+          Back to Home
+        </button>
       </section>
     );
   }
@@ -30,6 +36,14 @@ export default function UserProfileContent() {
     return (
       <section className={styles.loading} aria-live="polite">
         Loading user profile...
+        <div className={styles.skeletonContainer}>
+          <div
+            className={`${styles.skeletonLoader} ${styles.profileSkeleton}`}
+          ></div>
+          <div
+            className={`${styles.skeletonLoader} ${styles.repoSkeleton}`}
+          ></div>
+        </div>
       </section>
     );
   }

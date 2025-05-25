@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useGitHub } from '@/context/GitHubContext';
 import styles from './UserProfile.module.css';
+import { useEffect, useState } from 'react';
 
 interface UserProfileProps {
   compact?: boolean;
@@ -10,6 +11,26 @@ interface UserProfileProps {
 
 export default function UserProfile({ compact = false }: UserProfileProps) {
   const { user } = useGitHub();
+  const [avatarSize, setAvatarSize] = useState(compact ? 60 : 120);
+
+  useEffect(() => {
+    // Set avatar size based on screen width and compact mode
+    const updateAvatarSize = () => {
+      if (compact) {
+        setAvatarSize(window.innerWidth <= 600 ? 50 : 60);
+      } else {
+        setAvatarSize(window.innerWidth <= 480 ? 80 : 120);
+      }
+    };
+
+    // Run on mount and window resize
+    updateAvatarSize();
+    window.addEventListener('resize', updateAvatarSize);
+
+    return () => {
+      window.removeEventListener('resize', updateAvatarSize);
+    };
+  }, [compact]);
 
   if (!user) return null;
 
@@ -20,8 +41,8 @@ export default function UserProfile({ compact = false }: UserProfileProps) {
           <Image
             src={user.avatar_url}
             alt={`${user.login}'s avatar`}
-            width={60}
-            height={60}
+            width={avatarSize}
+            height={avatarSize}
             priority
           />
         </div>
@@ -44,8 +65,8 @@ export default function UserProfile({ compact = false }: UserProfileProps) {
         <Image
           src={user.avatar_url}
           alt={`${user.login}'s avatar`}
-          width={120}
-          height={120}
+          width={avatarSize}
+          height={avatarSize}
           priority
         />
       </div>

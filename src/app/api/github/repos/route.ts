@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import axios from 'axios';
-import { slugify } from '@/lib/utils';
+import { slugify } from '@/utils/utils';
 import { GitHubRepo } from '@/types/github';
-import { githubApiClient } from '@/lib/apiUtils';
+import { githubApiClient } from '@/lib/githubApi';
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
