@@ -146,7 +146,7 @@ Create a `.env.local` file in the root directory:
 | Variable | Description | Required |
 |----------|-------------|----------|
 | `GITHUB_API_URL` | GitHub API base URL | Yes |
-| `GITHUB_TOKEN` | GitHub Personal Access Token for higher rate limits | Optional |
+| `GITHUB_TOKEN` | GitHub Personal Access Token for higher rate limits | Yes |
 
 ## 🏗️ Architecture
 
@@ -265,7 +265,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Aditya Pratama**
 - GitHub: [@aditypraa](https://github.com/aditypraa)
-- LinkedIn: [Your LinkedIn Profile](https://linkedin.com/in/aditypraa)
+- LinkedIn: [@aditypraa](https://linkedin.com/in/aditypraa)
 
 ## 🙏 Acknowledgments
 
